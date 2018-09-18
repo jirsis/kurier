@@ -1,0 +1,4 @@
+- name: "install httpie"
+  apt:
+    name: httpie
+    state: present
