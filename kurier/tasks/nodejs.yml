@@ -1,0 +1,18 @@
+- name: download nodejs installer
+  get_url: 
+    url: https://deb.nodesource.com/setup_10.x
+    dest: /tmp/setup_10.x
+    force: yes
+    mode: 0755
+
+- name: add nodejs repositories
+  shell: /tmp/setup_10.x
+  become: yes
+
+- name: install nodejs
+  apt:
+    name: nodejs
+  
+- name: install nodejs extras
+  apt: 
+    name: build-essential
