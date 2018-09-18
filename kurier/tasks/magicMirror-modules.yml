@@ -1,0 +1,20 @@
+- name: commons
+  import_tasks: magicMirror-modules/commons.yml
+
+- name: imageSlideshow
+  import_tasks: magicMirror-modules/imageSlideshow.yml
+
+- name: calendar
+  import_tasks: magicMirror-modules/calendar.yml
+
+- name: page indicator
+  import_tasks: magicMirror-modules/pageIndicator.yml
+
+- name: emt
+  import_tasks: magicMirror-modules/emt.yml
+
+- name: weather
+  import_tasks: magicMirror-modules/weather.yml
+
+- name: pages 
+  import_tasks: magicMirror-modules/pages.yml

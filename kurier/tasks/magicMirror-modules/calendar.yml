@@ -1,0 +1,22 @@
+- name: download calendar module
+  git:
+    repo: 'https://github.com/jirsis/JIR-calendar.git'
+    dest: '{{ magicMirror_home }}/modules/JIR-calendar'
+
+- name: install calendar dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/JIR-calendar'
+    state: present
+
+- name: configure calendar module
+  blockinfile:
+    block: "{{ lookup('file', 'jir-calendar.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} calendar module - ansible managed block"
+
+- name: define personal calendar
+  replace:
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'personal_calendar_vault'
+    replace: '{{ personal_calendar_vault }}'

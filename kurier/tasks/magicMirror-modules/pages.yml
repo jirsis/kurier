@@ -1,0 +1,16 @@
+- name: download MMM-pages module
+  git:
+    repo: 'https://github.com/edward-shen/MMM-pages.git'
+    dest: '{{ magicMirror_home }}/modules/MMM-pages'
+
+- name: install MMM-pages dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/MMM-pages'
+    state: present
+
+- name: configure MMM-pages module
+  blockinfile:
+    block: "{{ lookup('file', 'mmm-pages.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} MMM-pages module - ansible managed block"

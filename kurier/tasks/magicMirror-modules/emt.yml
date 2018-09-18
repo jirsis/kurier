@@ -1,0 +1,28 @@
+- name: download emt module
+  git:
+    repo: 'https://github.com/jirsis/emt.git'
+    dest: '{{ magicMirror_home }}/modules/emt'
+
+- name: install emt dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/emt'
+    state: present
+
+- name: configure emt module
+  blockinfile:
+    block: "{{ lookup('file', 'jir-emt.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} emt module - ansible managed block"
+
+- name: define emt idClient
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'emt_idClient_vault'
+    replace: '{{ emt_idClient_vault }}'
+
+- name: define emt passKey
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'emt_passKey_vault'
+    replace: '{{ emt_passKey_vault }}'

@@ -1,0 +1,16 @@
+- name: download imageSlideShow module
+  git:
+    repo: 'https://github.com/AdamMoses-GitHub/MMM-ImageSlideshow.git'
+    dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow'
+
+- name: install imageSlideShow dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow'
+    state: present
+
+- name: configure imageSlideShow module
+  blockinfile:
+    block: "{{ lookup('file', 'mmm-imageSlideshow.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} imageSlideshow module - ansible managed block"

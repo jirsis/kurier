@@ -1,0 +1,36 @@
+- name: configure weather module
+  blockinfile:
+    block: |
+         {
+            module: "currentweather",
+            position: "top_right",
+            header: "{{ item.location }}",
+            classes: 'currentweather-{{ item.classes }}',
+            config: {
+                location: "{{ item.location }}",
+                locationID: "{{ item.id }}",
+                appid: "{{ weather_appid_vault }}",
+                showHumidity: true
+            }
+          },
+         {
+            module: "weatherforecast",
+            position: "top_right",
+            classes: 'weatherforecast-{{ item.classes }}',
+            config: {
+                location: "{{ item.location }}",
+                locationID: "{{ item.id }}",
+                appid: "{{ weather_appid_vault }}",
+                colored: true
+            }
+          },
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} {{ item.location }} weahter module - ansible managed block"
+  with_items: 
+    - { location: 'Madrid', classes: 'es', id: '3114397'}
+    - { location: 'Niemodlin', classes: 'pl', id: '3090951'}
+    - { location: 'Salto', classes: 'uy', id: '3440714'}
+    - { location: 'Aoiz', classes: 'aoiz', id: '3129937'}
+    - { location: 'Cardiff', classes: 'uk', id: '2653822'}
+    

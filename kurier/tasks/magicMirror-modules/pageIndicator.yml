@@ -1,0 +1,16 @@
+- name: download MMM-page-indicator module
+  git:
+    repo: 'https://github.com/edward-shen/MMM-page-indicator.git'
+    dest: '{{ magicMirror_home }}/modules/MMM-page-indicator'
+
+- name: install MMM-page-indicator dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/MMM-page-indicator'
+    state: present
+
+- name: configure MMM-page-indicator module
+  blockinfile:
+    block: "{{ lookup('file', 'mmm-page-indicator.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} MMM-page-indicator module - ansible managed block"

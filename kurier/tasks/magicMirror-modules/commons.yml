@@ -1,0 +1,7 @@
+- name: configure MagicMirror commons modules
+  blockinfile:
+    block: "{{ lookup('file', 'mmm-commons.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} commons modules - ansible managed block"
+    
