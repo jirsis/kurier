@@ -1,0 +1,20 @@
+---
+# tasks file for kurier
+
+- name: configure raspbian
+  import_tasks: raspbian.yml
+
+- name: install httpie command line tool
+  import_tasks: httpie.yml
+
+- name: install nodeJS
+  import_tasks: nodeJS.yml
+
+- name: install MagicMirror
+  import_tasks: magicMirror.yml
+
+- name: install and configurate MagicMirror modules
+  import_tasks: magicMirror-modules.yml  
+
+- name: install heimdall
+  import_tasks: heimdall.yml
