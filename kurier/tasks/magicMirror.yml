@@ -1,0 +1,30 @@
+- name: install magicMirror
+  git:
+    repo: 'https://github.com/MichMich/MagicMirror'
+    dest: '{{ magicMirror_home }}'
+    force: true
+ 
+- name: download all MagicMirror dependencies
+  npm: 
+    path: '{{ magicMirror_home }}'
+    state: present
+
+- name: copy initial MagicMirror config.js
+  copy:
+    src: config.js
+    dest: '{{ magicMirror_home }}/config/config.js'
+    force: true
+    mode: 0644
+
+- name: configure autostart back magicmirror
+  debug: 
+    msg: 'magicmirror autostart back not found'
+
+- name: install browser
+  debug: 
+    msg: 'install midori browser'
+
+- name: configure autostart browser
+  debug: 
+    msg: 'magicmirror browser not found'
+
