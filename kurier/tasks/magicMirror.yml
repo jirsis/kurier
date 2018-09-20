@@ -1,30 +1,65 @@
-- name: install magicMirror
-  git:
-    repo: 'https://github.com/MichMich/MagicMirror'
-    dest: '{{ magicMirror_home }}'
-    force: true
+#- name: install magicMirror
+#  git:
+#    repo: 'https://github.com/MichMich/MagicMirror'
+#    dest: '{{ magicMirror_home }}'
+#    force: true
  
-- name: download all MagicMirror dependencies
+#- name: download all MagicMirror dependencies
+#  npm: 
+#    path: '{{ magicMirror_home }}'
+#    state: present
+
+#- name: copy initial MagicMirror config.js
+#  copy:
+#    src: config.js
+#    dest: '{{ magicMirror_home }}/config/config.js'
+#    force: true
+#    mode: 0644
+
+#- name: install and configurate MagicMirror modules
+#  import_tasks: magicMirror-modules.yml  
+
+- name: install autostart MagicMirror manager
   npm: 
-    path: '{{ magicMirror_home }}'
-    state: present
+    name: pm2
+    global: yes
+    state: latest
+  become: yes
 
-- name: copy initial MagicMirror config.js
-  copy:
-    src: config.js
-    dest: '{{ magicMirror_home }}/config/config.js'
-    force: true
-    mode: 0644
+- name: stop MagicMirror
+  shell: pm2 stop magicMirror
+  args: 
+    chdir: '{{ magicMirror_home }}'
 
-- name: configure autostart back magicmirror
-  debug: 
-    msg: 'magicmirror autostart back not found'
+- name: deconfigure systemd MagicMirror manager
+  command: env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 unstartup systemd -u pi --hp /home/pi
+  become: yes
+
+- name: run pm2 web interface
+  shell: pm2 web
+
+- name: run MagicMirror
+  shell: pm2 start serveronly --name magicMirror
+  args: 
+    chdir: '{{ magicMirror_home }}'
+
+- name: configure systemd MagicMirror manager
+  command: env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+  become: yes
 
 - name: install browser
-  debug: 
-    msg: 'install midori browser'
+  apt: 
+    name: chromium-browser
+    state: latest
+  become: yes
 
-- name: configure autostart browser
-  debug: 
-    msg: 'magicmirror browser not found'
-
+- name: configure kioskMode browser
+  blockinfile:
+    path: /home/pi/.config/lxsession/LXDE-pi/autostart
+    block: |
+      @xset s off
+      @xset -dpms
+      @xset s noblank
+      @chromium-browser --app=http://localhost:3000 --start-fullscreen
+    marker: "// {mark} kioskMode - ansible managed block"
+  register: kiosk_mode_enabled
