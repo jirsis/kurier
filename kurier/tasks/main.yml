@@ -16,6 +16,7 @@
 #- name: install heimdall
 #  import_tasks: heimdall.yml
 
-#- name: reboot raspberry pi
-#  shell: reboot 
+- name: reboot raspberry pi
+  shell: reboot
+  become: yes 
 #  when: display_rotated.changed or pointer_disabled.changed or kiosk_mode_enabled.changed
