@@ -1,3 +1,15 @@
+- name: install vim
+  apt:
+    name: vim
+    state: latest
+  became: yes
+
+- name: install httpie
+  apt:
+    name: httpie
+    state: latest
+  became: yes
+
 - name: rotate screen
   lineinfile:
     path: /boot/config.txt
@@ -7,9 +19,5 @@
 - name: disable pointer
   apt:
     name: unclutter
-    autoremove: true
+    autoremove: yes
   register: pointer_disabled
-
-- name: reboot 
-  shell: reboot 
-  when: display_rotated.changed or pointer_disabled.changed
