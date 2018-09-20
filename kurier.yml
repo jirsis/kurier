@@ -2,6 +2,7 @@
 
   vars:
       magicMirror_home: '/home/pi/Documents/MagicMirror'
+      images_source_path: /Users/inaki.reta/Pictures/desktop/
       emt_idClient_vault: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36386430363633393632356132323364333265353463663839656233666633373933646530343633

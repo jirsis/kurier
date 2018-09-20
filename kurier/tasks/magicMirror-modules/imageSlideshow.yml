@@ -14,3 +14,14 @@
     path: "{{ magicMirror_home }}/config/config.js"
     insertbefore: "//modules"
     marker: "// {mark} imageSlideshow module - ansible managed block"
+
+- name: create images directory
+  file: 
+    path: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow/images/desktop/'
+    state: directory
+    mode: 0755
+
+#- name: copy images
+#  copy: 
+#    src: '{{ images_source_path }}'
+#    dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow/images/desktop/'
