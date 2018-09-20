@@ -1,0 +1,16 @@
+- name: download MMM-AirQuality module
+  git:
+    repo: 'https://github.com/CFenner/MMM-AirQuality.git'
+    dest: '{{ magicMirror_home }}/modules/MMM-AirQuality'
+
+- name: install MMM-AirQuality dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/MMM-AirQuality'
+    state: present
+
+- name: configure MMM-AirQuality module
+  blockinfile:
+    block: "{{ lookup('file', 'mmm-airquality.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} MMM-airquality module - ansible managed block"

@@ -10,6 +10,7 @@
                         "emt",
                         "MMM-page-indicator",
                         "MMM-ImageSlideshow",
+                        "MMM-AirQuality",
                 ],
                 modules: [
                    ["currentweather-es", "weatherforecast-es"],

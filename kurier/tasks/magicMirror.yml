@@ -9,15 +9,15 @@
 #    path: '{{ magicMirror_home }}'
 #    state: present
 
-#- name: copy initial MagicMirror config.js
-#  copy:
-#    src: config.js
-#    dest: '{{ magicMirror_home }}/config/config.js'
-#    force: true
-#    mode: 0644
+- name: copy initial MagicMirror config.js
+  copy:
+    src: config.js
+    dest: '{{ magicMirror_home }}/config/config.js'
+    force: true
+    mode: 0644
 
-#- name: install and configurate MagicMirror modules
-#  import_tasks: magicMirror-modules.yml  
+- name: install and configurate MagicMirror modules
+  import_tasks: magicMirror-modules.yml  
 
 - name: install autostart MagicMirror manager
   npm: 

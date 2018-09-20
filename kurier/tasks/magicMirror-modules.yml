@@ -10,6 +10,9 @@
 - name: page indicator
   import_tasks: magicMirror-modules/pageIndicator.yml
 
+- name: air quality
+  import_tasks: magicMirror-modules/airquality.yml
+
 - name: emt
   import_tasks: magicMirror-modules/emt.yml
 
