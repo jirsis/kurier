@@ -4,7 +4,6 @@
             config: {
                 imagePaths: [
                     './modules/MMM-ImageSlideshow/images/desktop',
-                    './modules/MMM-ImageSlideshow/images/hiacynt',
                 ],
                 fixedImageHeight: 450,
                 cacheFoundImages: true,
