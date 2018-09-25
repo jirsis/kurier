@@ -1,13 +1,13 @@
-#- name: install magicMirror
-#  git:
-#    repo: 'https://github.com/MichMich/MagicMirror'
-#    dest: '{{ magicMirror_home }}'
-#    force: true
+- name: install magicMirror
+  git:
+    repo: 'https://github.com/MichMich/MagicMirror'
+    dest: '{{ magicMirror_home }}'
+    force: true
  
-#- name: download all MagicMirror dependencies
-#  npm: 
-#    path: '{{ magicMirror_home }}'
-#    state: present
+- name: download all MagicMirror dependencies
+  npm: 
+    path: '{{ magicMirror_home }}'
+    state: present
 
 - name: copy initial MagicMirror config.js
   copy:
@@ -61,5 +61,5 @@
       @xset -dpms
       @xset s noblank
       @chromium-browser --app=http://localhost:3000 --start-fullscreen
-    marker: "// {mark} kioskMode - ansible managed block"
+    marker: "# {mark} kioskMode - ansible managed block"
   register: kiosk_mode_enabled
