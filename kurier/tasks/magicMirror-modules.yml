@@ -19,5 +19,10 @@
 - name: weather
   import_tasks: magicMirror-modules/weather.yml
 
+- name: kmg
+  import_tasks: magicMirror-modules/kmg.yml
+
 - name: pages 
   import_tasks: magicMirror-modules/pages.yml
+
+

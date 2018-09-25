@@ -1,0 +1,22 @@
+- name: download kmg module
+  git:
+    repo: 'https://github.com/jirsis/kmg.git'
+    dest: '{{ magicMirror_home }}/modules/kmg'
+    force: true
+
+- name: install kmg dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/kmg/'
+
+- name: configure kmg module
+  blockinfile:
+    block: "{{ lookup('file', 'jir-kmg.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} kmg module - ansible managed block"
+
+- name: define kmg guest_code
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'kmg_guest_token'
+    replace: '{{ kmg_guest_token_vault }}'
