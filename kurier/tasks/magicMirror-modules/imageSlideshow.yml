@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/AdamMoses-GitHub/MMM-ImageSlideshow.git'
     dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow'
+    force: true
 
 - name: install imageSlideShow dependencies
   npm: 

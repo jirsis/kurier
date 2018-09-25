@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/CFenner/MMM-AirQuality.git'
     dest: '{{ magicMirror_home }}/modules/MMM-AirQuality'
+    force: true
 
 - name: install MMM-AirQuality dependencies
   npm: 

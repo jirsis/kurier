@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/jirsis/JIR-calendar.git'
     dest: '{{ magicMirror_home }}/modules/JIR-calendar'
+    force: true
 
 - name: install calendar dependencies
   npm: 

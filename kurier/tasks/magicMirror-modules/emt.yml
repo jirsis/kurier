@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/jirsis/emt.git'
     dest: '{{ magicMirror_home }}/modules/emt'
+    force: true
 
 - name: install emt dependencies
   npm: 

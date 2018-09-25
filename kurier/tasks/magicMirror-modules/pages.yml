@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/edward-shen/MMM-pages.git'
     dest: '{{ magicMirror_home }}/modules/MMM-pages'
+    force: yes
 
 - name: install MMM-pages dependencies
   npm: 

@@ -2,6 +2,7 @@
   git:
     repo: 'https://github.com/edward-shen/MMM-page-indicator.git'
     dest: '{{ magicMirror_home }}/modules/MMM-page-indicator'
+    force: yes
 
 - name: install MMM-page-indicator dependencies
   npm: 
