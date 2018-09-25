@@ -11,6 +11,7 @@
                         "MMM-page-indicator",
                         "MMM-ImageSlideshow",
                         "MMM-AirQuality",
+                        "kmg",
                 ],
                 modules: [
                    ["currentweather-es", "weatherforecast-es"],
