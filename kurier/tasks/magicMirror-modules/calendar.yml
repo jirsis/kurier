@@ -4,10 +4,16 @@
     dest: '{{ magicMirror_home }}/modules/JIR-calendar'
     force: true
 
+- name: check calendar dependencies
+  find:
+    paths: '{{ magicMirror_home }}/modules/JIR-calendar/node_modules'
+  register: calendar_nodeModules
+
 - name: install calendar dependencies
   npm: 
     path: '{{ magicMirror_home }}/modules/JIR-calendar'
     state: present
+  when: calendar_nodeModules.examined == 0
 
 - name: configure calendar module
   blockinfile:

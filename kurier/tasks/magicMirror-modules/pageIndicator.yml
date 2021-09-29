@@ -4,14 +4,21 @@
     dest: '{{ magicMirror_home }}/modules/MMM-page-indicator'
     force: yes
 
-- name: install MMM-page-indicator dependencies
-  npm: 
-    path: '{{ magicMirror_home }}/modules/MMM-page-indicator'
-    state: present
-
 - name: configure MMM-page-indicator module
   blockinfile:
     block: "{{ lookup('file', 'mmm-page-indicator.js') }}"
     path: "{{ magicMirror_home }}/config/config.js"
     insertbefore: "//modules"
     marker: "// {mark} MMM-page-indicator module - ansible managed block"
+
+- name: change circle style MMM-page-indicator 1/2
+  replace: 
+    path: "{{ magicMirror_home }}/modules/MMM-page-indicator/MMM-page-indicator.js"
+    regexp: "circle.className = 'fa fa-circle indicator';"
+    replace: "circle.className = 'fas fa-circle indicator';"
+
+- name: change circle style MMM-page-indicator 2/2
+  replace: 
+    path: "{{ magicMirror_home }}/modules/MMM-page-indicator/MMM-page-indicator.js"
+    regexp: "circle.className = 'fa indicator';"
+    replace: "circle.className = ' indicator';"

@@ -1,7 +1,8 @@
         {
             module: "kmg",
-            position: "bottom_right",
+            position: "bottom_left",
             config: {
-                guest_token: "kmg_guest_token"
+                email: "kmg_email",
+                password: "kmg_password",
             }
         },

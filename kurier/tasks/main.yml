@@ -1,22 +1,15 @@
 ---
 # tasks file for kurier
 
-#- name: configure raspbian
-#  import_tasks: raspbian.yml
+- name: configure raspbian
+  import_tasks: raspbian.yml
 
-#- name: install httpie command line tool
-#  import_tasks: httpie.yml
-
-#- name: install nodeJS
-#  import_tasks: nodeJS.yml
+- name: install pi-hole
+  import_tasks: pi-hole.yml
 
 - name: install MagicMirror
   import_tasks: magicMirror.yml
 
-#- name: install heimdall
-#  import_tasks: heimdall.yml
-
 - name: reboot raspberry pi
   shell: reboot
   become: yes 
-#  when: display_rotated.changed or pointer_disabled.changed or kiosk_mode_enabled.changed

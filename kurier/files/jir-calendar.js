@@ -5,7 +5,7 @@
             config: {
                 calendars: [
                 {
-                    symbol: "fas fa-calendar",
+                    symbol: "fas fa-calendar-check",
                     url: "personal_calendar_vault"
                 },
                 {
@@ -21,40 +21,48 @@
                     url: "https://calendar.google.com/calendar/ical/pl.polish%23holiday%40group.v.calendar.google.com/public/basic.ics"
                 }
                 ],
-                maximumNumberOfDays: 15,
+                maximumNumberOfDayss: 15,
+                maximumEntries: 8,
                 fetchInterval: 300000,
                 excludedEvents: [
-                    "Telework",
                     "guarde",
                     "inglés",
-                    "Ainara"
+                    "Telework",
                 ],
                 titleReplace: {
-                    "ur.": "Ur.",
-                    "urodziny": "Ur.",
-                    "im.": "Im.",
+                    "Dr.": "",
                     "cumpleaños": "",
-                    "Cumpleaños": ""
+                    "Cumpleaños": "",
+                    "Cumple": "",
+                    "im.": "Im.",
+                    "Med.": "",
+                    "ur.": "Ur.",
+                    "urodziny": "Ur.",                    
                 },
                 customSymbols: [
+                    {name: "aniversario", symbol: "fab fa-pagelines"},
+                    {name: "boda", symbol: "fas fa-glass-cheers"},
+                    {name: "cumpleaños", symbol: "fas fa-birthday-cake" },
+                    {name: "Cumple", symbol: "fas fa-birthday-cake" },
+                    {name: "doctor", symbol: "fas fa-user-md"},
+                    {name: "Dr.", symbol: "fas fa-user-md", },
                     {name: "enfermeria", symbol: "fas fa-stethoscope", },
                     {name: "Enfermería", symbol: "fas fa-stethoscope", },
-                    {name: "pediatra", symbol: "fas fa-user-md", },
-                    {name: "Médico", symbol: "fas fa-user-md", },
+                    {name: "Forum", symbol: "fas fa-book", },
                     {name: "HM Nuevo Belén", symbol: "fas fa-user-md", },
-                    {name: "urodziny", symbol: "fas fa-birthday-cake"},
-                    {name: "ur.", symbol: "fas fa-birthday-cake" },
-                    {name: "Ur.", symbol: "fas fa-birthday-cake" },
-                    {name: "cumpleaños", symbol: "fas fa-birthday-cake" },
                     {name: "im.", symbol: "fas fa-chess-king" },
                     {name: "Im.", symbol: "fas fa-chess-king" },
-                    {name: "viaje", symbol: "fas fa-plane"},
-                    {name: "vuelo", symbol: "fas fa-plane"},
-                    {name: "doctor", symbol: "fas fa-user-md"},
-                    {name: "aniversario", symbol: "fab fa-pagelines"},
+                    {name: "Med.", symbol: "fas fa-user-md", },
+                    {name: "Médico", symbol: "fas fa-user-md", },
+                    {name: "pediatra", symbol: "fas fa-user-md", },
                     {name: "rocznica", symbol: "fab fa-pagelines"},
                     {name: "Tudespensa.com", symbol: "fas fa-shopping-cart"},
+                    {name: "ur.", symbol: "fas fa-birthday-cake" },
+                    {name: "Ur.", symbol: "fas fa-birthday-cake" },
+                    {name: "urodziny", symbol: "fas fa-birthday-cake"},
+                    {name: "viaje", symbol: "fas fa-plane"},
                     {name: "visita", symbol: "fas fa-plane-arrival"},
+                    {name: "vuelo", symbol: "fas fa-plane"},
                 ]
             }
         },

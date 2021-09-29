@@ -1,0 +1,41 @@
+- name: download alexia-cao module
+  git:
+    repo: 'https://github.com/jirsis/alexia-cao.git'
+    dest: '{{ magicMirror_home }}/modules/alexia-cao'
+    force: true
+
+- name: check alexia-cao dependencies
+  find:
+    paths: '{{ magicMirror_home }}/modules/alexia-cao/node_modules'
+  register: alexia_cao_nodeModules
+
+- name: install alexia-cao dependencies
+  npm: 
+    path: '{{ magicMirror_home }}/modules/alexia-cao/'
+  when: alexia_cao_nodeModules.examined == 0
+
+- name: configure alexia-cao module
+  blockinfile:
+    block: "{{ lookup('file', 'jir-alexia-cao.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} alexia-cao module - ansible managed block"
+
+- name: define alexia-cao school_code
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'alexia-cao_schoolCode'
+    replace: '{{ alexia_cao_schoolCode_vault }}'
+
+- name: define alexia-cao username
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'alexia-cao_username'
+    replace: '{{ alexia_cao_username_vault }}'
+
+- name: define alexia-cao password
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'alexia-cao_password'
+    replace: '{{ alexia_cao_password_vault }}'
+    

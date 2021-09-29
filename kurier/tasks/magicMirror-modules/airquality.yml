@@ -4,11 +4,6 @@
     dest: '{{ magicMirror_home }}/modules/MMM-AirQuality'
     force: true
 
-- name: install MMM-AirQuality dependencies
-  npm: 
-    path: '{{ magicMirror_home }}/modules/MMM-AirQuality'
-    state: present
-
 - name: configure MMM-AirQuality module
   blockinfile:
     block: "{{ lookup('file', 'mmm-airquality.js') }}"

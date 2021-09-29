@@ -1,0 +1,12 @@
+- name: download JIR-tarifa-luz module
+  git:
+    repo: 'https://github.com/jirsis/JIR-tarifa-luz.git'
+    dest: '{{ magicMirror_home }}/modules/JIR-tarifa-luz'
+    force: true
+
+- name: configure JIR-tarifa-luz module
+  blockinfile:
+    block: "{{ lookup('file', 'jir-tarifa-luz.js') }}"
+    path: "{{ magicMirror_home }}/config/config.js"
+    insertbefore: "//modules"
+    marker: "// {mark} JIR-tarifa-luz module - ansible managed block"

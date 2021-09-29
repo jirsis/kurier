@@ -4,9 +4,15 @@
     dest: '{{ magicMirror_home }}/modules/kmg'
     force: true
 
+- name: check kmg dependencies
+  find:
+    paths: '{{ magicMirror_home }}/modules/kmg/node_modules'
+  register: kmg_nodeModules
+
 - name: install kmg dependencies
   npm: 
     path: '{{ magicMirror_home }}/modules/kmg/'
+  when: kmg_nodeModules.examined == 0
 
 - name: configure kmg module
   blockinfile:
@@ -15,8 +21,14 @@
     insertbefore: "//modules"
     marker: "// {mark} kmg module - ansible managed block"
 
-- name: define kmg guest_code
+- name: define kmg email
   replace: 
     path: "{{ magicMirror_home }}/config/config.js"
-    regexp: 'kmg_guest_token'
-    replace: '{{ kmg_guest_token_vault }}'
+    regexp: 'kmg_email'
+    replace: '{{ kmg_email_vault }}'
+
+- name: define kmg password
+  replace: 
+    path: "{{ magicMirror_home }}/config/config.js"
+    regexp: 'kmg_password'
+    replace: '{{ kmg_password_vault }}'

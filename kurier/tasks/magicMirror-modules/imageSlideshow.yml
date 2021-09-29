@@ -4,11 +4,6 @@
     dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow'
     force: true
 
-- name: install imageSlideShow dependencies
-  npm: 
-    path: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow'
-    state: present
-
 - name: configure imageSlideShow module
   blockinfile:
     block: "{{ lookup('file', 'mmm-imageSlideshow.js') }}"
@@ -22,7 +17,15 @@
     state: directory
     mode: 0755
 
-#- name: copy images
-#  copy: 
-#    src: '{{ images_source_path }}'
-#    dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow/images/desktop/'
+- name: check directory has images
+  find:
+    paths: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow/images/desktop/'
+  register: imageSlideShow_images
+
+- name: copy images
+  copy: 
+    src: '{{ images_source_path }}'
+    dest: '{{ magicMirror_home }}/modules/MMM-ImageSlideshow/images/desktop/'
+    follow: true
+  when: imageSlideShow_images.examined == 0
+

@@ -5,7 +5,7 @@
                 imagePaths: [
                     './modules/MMM-ImageSlideshow/images/desktop',
                 ],
-                fixedImageHeight: 450,
+                fixedImageHeight: 400,
                 cacheFoundImages: true,
                 patternToInclude: '^kurier-',
             }

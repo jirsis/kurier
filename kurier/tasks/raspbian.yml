@@ -2,22 +2,25 @@
   apt:
     name: vim
     state: latest
-  became: yes
+  become: yes
 
 - name: install httpie
   apt:
     name: httpie
     state: latest
-  became: yes
+  become: yes
 
 - name: rotate screen
   lineinfile:
-    path: /boot/config.txt
-    line: 'display_rotate=3'
+    path: /usr/share/dispsetup.sh
+    line: 'DISPLAY=:0 xrandr --output HDMI-1 --rotate left'
+    insertbefore: 'exit 0'
   register: display_rotated
+  become: yes
 
 - name: disable pointer
   apt:
     name: unclutter
     autoremove: yes
   register: pointer_disabled
+  become: yes

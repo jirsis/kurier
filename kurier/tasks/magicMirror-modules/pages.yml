@@ -4,11 +4,6 @@
     dest: '{{ magicMirror_home }}/modules/MMM-pages'
     force: yes
 
-- name: install MMM-pages dependencies
-  npm: 
-    path: '{{ magicMirror_home }}/modules/MMM-pages'
-    state: present
-
 - name: configure MMM-pages module
   blockinfile:
     block: "{{ lookup('file', 'mmm-pages.js') }}"

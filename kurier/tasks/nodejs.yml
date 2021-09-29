@@ -1,18 +1,29 @@
+- name: check nodejs is installed
+  shell: command -v node >/dev/null 2>&1
+  register: node_exist
+  ignore_errors: yes
+
 - name: download nodejs installer
   get_url: 
     url: https://deb.nodesource.com/setup_10.x
     dest: /tmp/setup_10.x
     force: yes
     mode: 0755
+  when: not node_exist.rc == 0
 
 - name: add nodejs repositories
   shell: /tmp/setup_10.x
   become: yes
+  when: not node_exist.rc == 0
 
 - name: install nodejs
   apt:
     name: nodejs
+  become: yes
+  when: not node_exist.rc == 0
   
 - name: install nodejs extras
   apt: 
     name: build-essential
+  become: yes
+  when: not node_exist.rc == 0

@@ -1,0 +1,41 @@
+- name: Check if pi-hole is installed
+  shell: which pihole
+  register: pihole_exist
+  ignore_errors: true
+
+
+- name: Download pi-hole script to install
+  get_url:
+    url: https://install.pi-hole.net
+    dest: /tmp/pi-hole.sh
+    mode: 0755
+  when: not pihole_exist.rc == 0
+
+- name: Create pi-hole configuration path
+  file:
+    path: /etc/pihole
+    state: directory
+    mode: '0755'
+  when: not pihole_exist.rc == 0
+  become: yes
+
+- name: Copy pi-hole configuration file 
+  copy:
+    src: pi-hole.config
+    dest: '/etc/pihole/setupVars.conf'
+    force: true
+    mode: 0644
+  when: not pihole_exist.rc == 0
+  become: yes
+
+- name: define web interface password
+  replace: 
+    path: '/etc/pihole/setupVars.conf'
+    regexp: 'pihole_web_password_vault'
+    replace: '{{ pihole_web_password_vault }}'
+  when: not pihole_exist.rc == 0
+  become: yes
+
+- name: Install pi-hole
+  shell: /tmp/pi-hole.sh --unattended
+  when: not pihole_exist.rc == 0

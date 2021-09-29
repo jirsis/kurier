@@ -7,7 +7,7 @@ var config = {
     timeFormat: 24,
     units: "metric",
 
-    zoom: 1,
+    zoom: 0.75,
 
     modules: [
     //modules   

@@ -3,15 +3,18 @@
             config: {
                 rotationTime: 10000,
                 excludes: [
-                        "updatenotification",
-                        "clock",
                         "alert",
+                        "alexia-cao",
+                        "clock",
                         "JIR-calendar",
-                        "emt",
+                        "JIR-tarifa-luz",
+                        "kmg",
+                        "MMM-AirQuality",
                         "MMM-page-indicator",
                         "MMM-ImageSlideshow",
-                        "MMM-AirQuality",
-                        "kmg",
+                        "updatenotification",
+                        
+                        
                 ],
                 modules: [
                    ["currentweather-es", "weatherforecast-es"],
